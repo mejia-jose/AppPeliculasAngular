@@ -11,7 +11,8 @@
    8. Buscador de películas
    9. Buscador de series
    10. Paginador de registros
-  
-   11. Importante
-   12. Una vez clonado el repositorio, se debe instalar los mdulos de node
+
+
+4. Importante
+  1. Una vez clonado el repositorio, se debe instalar los mdulos de node
        
