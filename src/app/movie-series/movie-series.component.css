@@ -1,0 +1,100 @@
+.tarjet
+{
+  padding: 15px;
+  margin: 18px;
+}
+
+.cardMovie
+{
+    padding: 5px;
+}
+
+.boton{
+    width: 67px;
+    height: 64px;
+    background-color: #09127f;
+    margin: 5px;
+    padding: 8px;
+    border-radius: 50px;
+    font-size: 11px;
+    line-height: 48px;
+    text-transform: uppercase;
+    float: left;
+  }
+  .boton:hover{
+    opacity: 0.50;
+    -moz-opacity: .50;
+    filter:alpha (opacity=50);
+  }
+  .boton a{
+    color:#fff;
+    text-decoration:none;
+    padding:5px 5px 5px 0;
+  }
+
+  .rowConten
+  {
+    text-align: center;
+  }
+
+  .search
+  {
+    width: 30%;
+    height: 6vh;
+    border-radius: 10px;
+    background-color: #0b112b;
+    color: #fff;
+    font-weight: bold;
+  }
+
+  .searchP
+  {
+    padding: 8px;
+    margin: 18px;
+  }
+
+  .btnMy
+  {
+    background-color: #09127f;
+    color: #f0f3f6;
+    font-weight: bold;
+    padding: 9px 13px 8px 9px;
+    margin: 1px;
+    border-radius: 11px;
+    border-color: #09127f;
+    cursor: pointer;
+  }
+
+  .image-container {
+    overflow: hidden;
+    position: relative;
+    display: inline-block;
+}
+
+.image-container img {
+    transition: transform 0.3s ease;
+}
+
+.image-container:hover img {
+    transform: scale(1.1);
+}
+
+.button
+{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background-color:#09127f;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  border: none;
+  border-radius: 50px;
+  padding: 10px;
+  margin: 5px;
+  transition: opacity 0.3s;
+  color: #f0f3f6;
+}
+
+.image-container:hover .button {
+  opacity: 2;
+}

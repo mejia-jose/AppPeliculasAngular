@@ -1,0 +1,67 @@
+<div class="content" role="main">
+
+    <div *ngIf="messageError">
+        <div class="alert alert-danger" role="alert">
+            <p>{{ messageError }}</p>
+        </div>
+    </div>
+      
+    <!-- Titulo  -->
+    <div class="card highlight-card card-small">
+      <img width="30" alt="My Cinema Plus" src="assets/images/estrella.png"/>
+      <span>Las mejores películas y series están en My Cinema Plus Entertainment</span>
+    </div>
+    
+    <!-- Top 5 mejores películas -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="titulo">Top 5 mejores películas</h2>
+        </div>
+    </div>
+  
+    <div class="card-container">
+        <div *ngFor="let pelicula of topFiveMovies">
+            <div class="row">
+                <div class="col-md-12 dist">
+                    <a (click)="viewDetail(pelicula.id,'movie')" class="space image-container">
+                        <img title="{{pelicula.title}}" [src]="urlImage + pelicula.poster_path" alt="{{ pelicula.title }} Poster" style="max-width: 160px;">
+                        <h5 title="{{pelicula.title}}" class="colorTexto">{{ acortarName(pelicula.title) }}</h5>
+                        <button class="button"><i class="fas fa-eye"></i> Detalle</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row col-lg-10">
+            <button (click)="goAll(movie)" type="button" class="btnMy"><i class="fas fa-eye"></i> Ver más películas</button>
+        </div>
+    </div><br/><br/>
+  
+    <!-- Top 5 mejores shows de televisión -->
+    
+    <div class="row">
+        <br>
+        <div class="col-lg-12">
+            <h2 class="titulo">Top 5 mejores shows de televisión</h2>
+        </div>
+    </div>
+    <div class="card-container">
+        <div *ngFor="let serie of topFiveSeries">
+            <div class="row">
+                <div class="col-md-12 dist">
+                    <a (click)="viewDetail(serie.id,'tv')" class="space image-container">
+                        <img title="{{serie.name}}" [src]="urlImage + serie.poster_path" alt="{{ serie.name }} Poster" style="max-width: 160px;">
+                         <h5 title="{{serie.name}}" class="colorTexto">{{ acortarName(serie.name) }}</h5>
+                         <button class="button"><i class="fas fa-eye"></i> Detalle</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row col-lg-10">
+                <button (click)="goAll(series)" type="button" class="btnMy"><i class="fas fa-eye"></i> Ver más series</button>
+        </div>
+    </div>
+    <!-- Footer -->
+    <footer>
+        Copyright My Cinema Plus Entertainment
+    </footer>
+</div>

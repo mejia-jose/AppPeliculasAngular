@@ -1,0 +1,57 @@
+
+<div class="contenedor" role="main">
+
+    <div *ngIf="messageError">
+        <div class="alert alert-danger" role="alert">
+            <p>{{ messageError }}</p>
+        </div>
+    </div>
+    <br>
+    
+    <div class="row">
+        <div class="col-lg-12">
+            <h3 style="text-align: left" class="cTitle">Explora nuestra amplia selección de contenido en películas y series de todo el mundo.</h3>
+        </div>
+    </div>
+    
+    <!---Contenido-->
+    <div class="row">
+            <div class="card-containerNew"> 
+                <!---Buscador-->
+                <div class="row" *ngIf="allContent.length === 0">
+                    <div class="col-md-12 col-lg-12">
+                        <div class="alert alert-danger" role="alert">
+                            <p>Su búsqueda no arrojó resultados. Por favor, intente con otros términos de búsqueda.</p>
+                        </div>
+                    </div>
+                </div> 
+                <div class="row searchP">
+                    <div class="col-md-5">
+                        <form [formGroup]="formFilter">
+                            <div class="input-group">
+                                <input class="form-control search" formControlName="search" type="text" placeholder="Buscar...">
+                                <button (click)="validForm()"type="button" class="btn btnMy"><i class="fas fa-search"></i> Buscar</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                </div>
+                <div class="row tarjet">
+                    <div class="col-md-3" *ngFor="let data of allContent">
+                        <a (click)="viewDetail(data.id,typeContent)" class="space image-container">
+                            <img class="" title="{{data.title}}" [src]="data.poster_path ? (urlImage + data.poster_path) : 'assets/images/no_fount.jpg'" alt="{{ data.title }} Poster" style="max-width: 260px;">
+                            <h5 title="typeContent === 'movie' ? {{data.title}} : {{data.original_name}}" class="colorTexto cardMovie">{{ typeContent === 'movie' ? data.title : data.original_name }}</h5>
+                            <button class="button"><i class="fas fa-eye"></i> Detalle</button>
+                        </a>
+                    </div><br>
+                </div>
+                <div *ngIf="totalPages > 1" class="pagination d-flex justify-content-center">
+                    <div class="row rowConten">
+                        <div class="boton"><a (click)="formerPagination(currentPage)">Anterior</a></div>
+                        <div class="boton"><a>{{ currentPage }}</a></div>
+                        <div class="boton"><a (click)="nextPagination(currentPage)">Siguiente</a></div>
+                    </div>
+                </div>                  
+            </div>
+        </div>
+</div>

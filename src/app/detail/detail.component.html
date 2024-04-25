@@ -1,0 +1,179 @@
+
+<div class="contenedor" role="main" *ngIf="getDetail">
+
+    <div *ngIf="messageError">
+        <div class="alert alert-danger" role="alert">
+            <p>{{ messageError }}</p>
+        </div>
+    </div>
+    <br>
+    
+    <div class="row">
+        <div class="col-lg-10">
+            <h3 style="text-align: left" class="cTitle">{{ type === 'movie' ? getDetail.title + ' (' + getYear(getDetail.release_date) + ')' : getDetail.name + '(' + getYear(getDetail.first_air_date) + ')' }}
+            </h3>
+        </div>
+        <div class="col-lg-2">
+            <h3 style="text-align: left" class="cTitle">Lo más visto</h3>
+        </div>
+    </div>
+    
+    <!---Contenido-->
+    <div class="row">
+        <!---Detalle de las peliculas-->
+        <div class="col-lg-10" *ngIf="type==='movie'">
+            <div class="card-containerNew"> 
+                <div class="row">
+                    <div class="col-md-4">
+                        <a class="space image-container">
+                            <img class="spaceImage" [src]="urlImage + getDetail.backdrop_path" alt="{{ getDetail.title }} Poster">
+                        </a>
+                    </div>
+                    <div class="col-md-8">
+                        <h3 class="textCard">{{ getDetail.title }} ({{ getYear(getDetail.release_date) }})</h3>
+                        <div class="row" style="padding: 20px;">
+                            <div class="col-lg-12">
+                                <button class="btn btn-secondary textDetail">PG-{{ getDetail.id}}</button> <small class="textDetail">({{ getDetail.release_date }} {{getDetail.origin_country[0]}})</small>
+                            </div>
+            
+                            <div class="col-lg-12 categorias">
+                               <small class="textDetail"> <b>Géneros cinematográficos :</b> </small> <small class="textDetail" *ngFor="let category of getDetail.genres">{{ category.name }}, </small>
+                            </div>
+        
+                            <div class="col-lg-12 categorias">
+                                <small class="textDetail"> <b> Duración :</b> {{convertirHoraMinuto(getDetail.runtime)}} </small>
+                            </div>
+        
+                            <div class="col-lg-12 categorias">
+                                <small class="textDetail"> <b>Idioma : </b> {{ retornarLenguaje(getDetail.original_language) }} </small>
+                            </div>
+        
+                            <div class="col-lg-12 categorias">
+                                <small class="textDetail"> <b>Casas productoras :</b> </small> <small class="textDetail" *ngFor="let category of getDetail.production_companies">{{ category.name }}, </small>
+                             </div>
+        
+                            <div class="col-lg-12 categorias">
+                                <small class="textDetail"><b> Puntuación de usuarios : </b></small> 
+                                <div class="progress-circle" [ngStyle]="{ 'background': getCircleBackgroundColor(getDetail.vote_average) }">
+                                    <span class="progress-number">{{ getDetail.vote_average }}%</span>
+                                  </div> 
+                            </div>
+        
+                            <div class="col-lg-12 ">
+                                <p class="textDetail">{{ getDetail.tagline }}</p>
+                            </div> 
+        
+                            <div class="col-lg-12 ">
+                                <br><h4 class="textDetail"><b>Sinopsis :</b> </h4>
+                                <p class="textDetail">{{ getDetail.overview }}</p>
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!--Detalle de las series-->
+        <div class="col-lg-10" *ngIf="type === 'tv'">
+            <div class="card-containerNew"> 
+                <div class="row">
+                    <div class="col-md-4">
+                        <a class="space image-container">
+                            <img class="spaceImage" [src]="urlImage + getDetail.backdrop_path" alt="{{ getDetail.title }} Poster">
+                        </a>
+                    </div>
+                    <div class="col-md-8">
+                        <h3 class="textCard">{{ getDetail.name }} ({{ getYear(getDetail.first_air_date) }})</h3>
+                        <div class="row" style="padding: 20px;">
+                            <div class="col-lg-12">
+                                <button class="btn btn-secondary textDetail">PG-{{ getDetail.id}}</button> <small class="textDetail">({{ getDetail.release_date }} {{getDetail.origin_country[0]}})</small>
+                            </div>
+            
+                            <div class="col-lg-12 categorias">
+                               <small class="textDetail"> <b>Géneros cinematográficos :</b> </small> <small class="textDetail" *ngFor="let category of getDetail.genres">{{ category.name }}, </small>
+                            </div>
+        
+                            <div class="col-lg-12 categorias">
+                                <small class="textDetail"> <b> Cantidad de temporas :</b> {{getDetail.number_of_seasons}} </small>
+                            </div>
+
+                            <div class="col-lg-12 categorias">
+                                <small class="textDetail"> <b> Cantidad de episiodios :</b> {{getDetail.number_of_episodes}} </small>
+                            </div>
+        
+                            <div class="col-lg-12 categorias">
+                                <small class="textDetail"> <b>Idioma : </b> {{ retornarLenguaje(getDetail.original_language) }} </small>
+                            </div>
+        
+                            <div class="col-lg-12 categorias">
+                                <small class="textDetail"> <b>Casas productoras :</b> </small> <small class="textDetail" *ngFor="let category of getDetail.production_companies">{{ category.name }}, </small>
+                             </div>
+        
+                            <div class="col-lg-12 categorias">
+                                <small class="textDetail"><b> Puntuación de usuarios : </b></small> 
+                                <div class="progress-circle" [ngStyle]="{ 'background': getCircleBackgroundColor(getDetail.vote_average) }">
+                                    <span class="progress-number">{{ getDetail.vote_average }}%</span>
+                                  </div> 
+                            </div>
+        
+                            <div class="col-lg-12 ">
+                                <p class="textDetail">{{ getDetail.tagline }}</p>
+                            </div> 
+        
+                            <div class="col-lg-12 ">
+                                <br><h4 class="textDetail"><b>Sinopsis :</b> </h4>
+                                <p class="textDetail" style="text-align: justify;">{{ getDetail.overview }}</p>
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Las 5 peliculas más vistas-->
+        <div class="col-md-2">
+            <div *ngFor="let pelicula of movieTopFive">
+                <div class="row">
+                    <div class="col-md-12" *ngIf="pelicula.id != id">
+                        <a class="space image-container">
+                            <img class="imageSmall" title="{{pelicula.title}}" [src]="urlImage + pelicula.poster_path" alt="{{ pelicula.title }} Poster">
+                            <h5 title="{{pelicula.title}}" class="cTitleTwo">{{ acortarName(pelicula.title) }}</h5>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Reparto principal-->
+        <div class="col-md-12">
+            <h3 style="text-align: left" class="cTitle">Reparto principal</h3>
+            <div class="card-containerNew">
+                <div class="row">
+                    <div class="col-md-2" *ngFor="let reparto of getReparto">
+                        <div class="dist">
+                            <a class="space image-container">
+                                <img title="{{reparto.name}}" [src]="reparto.profile_path ? (urlImage + reparto.profile_path) : 'assets/images/no_fount.jpg'" alt="{{ reparto.name }} Poster" alt="{{ reparto.name }} Poster" style="max-width: 160px;">
+                                <h5 title="{{reparto.name}}" class="cTitle">{{ reparto.name }}</h5>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="row col-lg-4"></div>
+                    <div class="row col-lg-4">
+                        <button *ngIf="statusBtnElencoAll" (click)="obtenerReparto(0)" type="button" class="btnMy"><i class="fas fa-eye"></i> Ver todo el elenco</button>
+                        <button *ngIf="statusBtnElencoPart" (click)="obtenerReparto(6)" type="button" class="btnMy"><i class="fas fa-eye"></i> Ver solo una parte del elenco</button>
+                    </div>
+                    <div class="row col-lg-4"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Reparto principal-->
+    <div class="row">
+       
+    </div>
+    
+    
+</div>
